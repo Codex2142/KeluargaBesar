@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender', ['male', 'female']);
             $table->date('DOB');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->enum('from', ['int', 'eks']);
-            $table->string('photo');
-            $table->foreignId('partner_id')->nullable()->constrained('family_members');
-            $table->foreignId('parent_id')->nullable()->constrained('family_members');
+            $table->string('photo')->nullable();
+            $table->foreignId('partner_id')->nullable()->constrained('family_members')->onDelete('set null');
+            $table->foreignId('parent_id')->nullable()->constrained('family_members')->onDelete('set null');
             $table->timestamps();
         });
     }

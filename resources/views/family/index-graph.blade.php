@@ -15,9 +15,10 @@
         return null;
     }
 
-    // Recursive render tree node
+    // render rekurisf
     function renderNode($member, $treeMap, $eksternal)
     {
+
         echo '<li>';
 
         // Card pasangan
@@ -25,7 +26,7 @@
 
         // Card untuk anggota utama
         echo '<div class="max-w-sm rounded overflow-hidden shadow-lg border bg-white">';
-        echo '<img class="w-full h-48 object-cover" src="' . asset('images/Skirk.jpg') . '" alt="' . $member['name'] . '">';
+        echo '<img class="w-full h-48 object-cover" src="' . asset('images/Wallpaper.jpg') . '" alt="' . $member['name'] . '">';
         echo '<div class="px-6 py-4 text-center">';
         echo '<div class="font-bold text-lg uppercase truncate w-40 mx-auto">' . $member['name'] . '</div>';
         echo '<div class="flex justify-around text-gray-500 text-sm mt-2">';
@@ -39,13 +40,13 @@
         // Jika ada pasangan, tampilkan juga
         if ($member['partner_id']) {
             $partner = getPartner($member['partner_id'], $eksternal);
-            $partnerName = $partner ? $partner['name'] : 'Unknown';
+            $partnerName = $partner ? $partner['name'] : 'Misterius';
 
             $gender = $partner ? ucfirst($partner['gender']) : 'External';
             $dob = $partner['DOB'] ?? '-';
 
             echo '<div class="max-w-sm rounded overflow-hidden shadow-lg border bg-gray-100">';
-            echo '<img class="w-full h-48 object-cover" src="' . asset('images/Skirk.jpg') . '" alt="' . $partnerName . '">';
+            echo '<img class="w-full h-48 object-cover" src="' . asset('images/Wallpaper.jpg') . '" alt="' . $partnerName . '">';
             echo '<div class="px-6 py-4 text-center">';
             echo '<div class="font-bold text-lg uppercase truncate w-40 mx-auto">' . $partnerName . '</div>';
             echo '<div class="flex justify-around text-gray-500 text-sm mt-2">';
@@ -57,7 +58,7 @@
 
         }
 
-        echo '</div>'; // close flex container
+        echo '</div>'; // flex container
 
         // Tampilkan anak-anak
         if (isset($treeMap[$member['id']])) {
