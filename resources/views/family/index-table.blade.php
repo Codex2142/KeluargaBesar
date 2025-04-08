@@ -63,7 +63,7 @@
                     </td>
                     <td class="px-6 py-4">{{ $member['name'] }}</td>
                     <td class="px-6 py-4 capitalize">{{ $member['gender'] === 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
-                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($member['DOB'])->translatedFormat('d F Y') }}</td>
+                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($member['DOB'])->locale('id')->translatedFormat('d F Y') }}</td>
                     <td class="px-6 py-4">{{ $member['description'] }}</td>
                     <td class="px-6 py-4">{{ $member['from'] === 'int' ? 'Asli Keluarga' : 'Dari Keluarga Lain' }}</td>
                     <td class="px-6 py-4">
