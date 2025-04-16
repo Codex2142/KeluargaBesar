@@ -14,14 +14,16 @@
     <h1 class="text-3xl font-bold mb-6">Data Keluarga</h1>
 
     {{-- Tombol Tambah --}}
-    <div class="flex justify-between items-center mt-6">
-        <a href="family/tambah">
-            <button type="button"
-                    class="bg-green-700 hover:bg-green-900 text-white px-5 mb-4 py-2 rounded-lg shadow-md text-sm font-semibold transition">
-                Tambahkan
-            </button>
-        </a>
-    </div>
+    @if (Auth::user()->level == 'admin')
+        <div class="flex justify-between items-center mt-6">
+            <a href="family/tambah">
+                <button type="button"
+                        class="bg-green-700 hover:bg-green-900 text-white px-5 mb-4 py-2 rounded-lg shadow-md text-sm font-semibold transition">
+                    Tambahkan
+                </button>
+            </a>
+        </div>
+    @endif
 
     {{-- Success / Error --}}
     @if(session('success'))
@@ -47,7 +49,9 @@
                 <th class="px-6 py-3">Deskripsi</th>
                 <th class="px-6 py-3">Asal</th>
                 <th class="px-6 py-3">Foto</th>
-                <th class="px-6 py-3">Aksi</th>
+                @if (Auth::user()->level == 'admin')
+                    <th class="px-6 py-3">Aksi</th>
+                @endif
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
@@ -63,7 +67,7 @@
                     </td>
                     <td class="px-6 py-4">{{ $member['name'] }}</td>
                     <td class="px-6 py-4 capitalize">{{ $member['gender'] === 'male' ? 'Laki-laki' : 'Perempuan' }}</td>
-                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($member['DOB'])->translatedFormat('d F Y') }}</td>
+                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($member['DOB'])->locale('id')->translatedFormat('d F Y') }}</td>
                     <td class="px-6 py-4">{{ $member['description'] }}</td>
                     <td class="px-6 py-4">{{ $member['from'] === 'int' ? 'Asli Keluarga' : 'Dari Keluarga Lain' }}</td>
                     <td class="px-6 py-4">
@@ -77,25 +81,27 @@
                                  alt="No Photo">
                         @endif
                     </td>
-                    <td class="px-6 py-4">
-                        <div class="flex gap-2">
-                            <a href="{{ route('family.edit', $member['id']) }}">
-                                <button
-                                    class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow text-xs font-semibold">
-                                    Edit
-                                </button>
-                            </a>
-                            <form action="{{ route('family.destroy', $member['id']) }}" method="POST"
-                                  onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                        class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow text-xs font-semibold">
-                                    Hapus
-                                </button>
-                            </form>
-                        </div>
-                    </td>
+                    @if (Auth::user()->level == 'admin')
+                        <td class="px-6 py-4">
+                            <div class="flex gap-2">
+                                <a href="{{ route('family.edit', $member['id']) }}">
+                                    <button
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded shadow text-xs font-semibold">
+                                        Edit
+                                    </button>
+                                </a>
+                                <form action="{{ route('family.destroy', $member['id']) }}" method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded shadow text-xs font-semibold">
+                                        Hapus
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

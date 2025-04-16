@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\FamilyMember;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Hash;
 
 class ExampleSeeder extends Seeder
 {
@@ -33,7 +35,30 @@ class ExampleSeeder extends Seeder
             'description' => 'Istri dari Kakek A, seorang ibu rumah tangga.'
         ]);
 
-        $grandfather->update(['partner_id' => $grandmother->id]);
+        // ------------------------------------------
+
+        $admin = User::create([
+            'name' => 'Kakek',
+            'phone' => '082336546903',
+            'password' => Hash::make('111111'),
+            'level' => 'admin'
+        ]);
+
+        $user = User::create([
+            'name' => 'Nenek',
+            'phone' => '082336546904',
+            'password' => Hash::make('111111'),
+            'level' => 'user'
+        ]);
+
+        $grandfather->update([
+            'partner_id' => $grandmother->id,
+            'user_id' => $admin->id,
+        ]);
+
+        $grandmother->update([
+            'user_id' => $user->id,
+        ]);
     }
 
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->foreignId('partner_id')->nullable()->constrained('family_members')->onDelete('set null');
             $table->foreignId('parent_id')->nullable()->constrained('family_members')->onDelete('set null');
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }

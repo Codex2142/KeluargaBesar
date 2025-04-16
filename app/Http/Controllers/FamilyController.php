@@ -30,10 +30,13 @@ class FamilyController extends Controller
      */
     public function create()
     {
-        // untuk form parent_id dan partner_id
+        // untuk partner_id
         $family = FamilyMember::get()->toArray();
+        // untuk parent_id
+        $parent = FamilyMember::where('from', 'int')->get()->toArray();
         return view('family.add',[
-            'family' => $family
+            'family' => $family,
+            'parent' => $parent
         ]);
     }
 
@@ -89,10 +92,15 @@ class FamilyController extends Controller
     {
 
         $member = FamilyMember::findOrFail($id);
+
+        // untuk partner_id
         $family = FamilyMember::get()->toArray();
+        // untuk parent_id
+        $parent = FamilyMember::where('from', 'int')->get()->toArray();
         return view('family.edit',[
             'family' => $family,
-            'member' => $member
+            'member' => $member,
+            'parent' => $parent
         ]);
     }
 

@@ -19,9 +19,14 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'phone',
         'password',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(FamilyMember::class, 'user_id', 'id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
