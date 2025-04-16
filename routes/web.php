@@ -18,7 +18,7 @@ Route::middleware(['guest'])->group(function(){
 
 Route::middleware(['auth'])->group(function(){
 
-    Route::post('/logout', [loginController::class, 'destroy'])->name('login.destroy');
+    Route::get('/logout', [loginController::class, 'destroy'])->name('login.destroy');
 
     Route::middleware(['level:admin'])->group(function(){
         Route::get('/admin', [accountController::class, 'index'])->name('account.index');
