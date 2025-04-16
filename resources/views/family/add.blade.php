@@ -10,7 +10,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="bg-gray-100">
-    <div class="max-w-2xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl">
+    <div class="max-w-2xl mx-auto mt-10 mb-10 bg-white p-8 rounded-2xl shadow-xl">
         <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-2">Tambah Anggota Keluarga</h2>
 
         {{-- Success / Error --}}
@@ -36,7 +36,8 @@
                         <label class="block text-gray-700 font-semibold mb-1">Nama Lengkap</label>
                         <input type="text" name="name" value="{{ old('name') }}"
                             class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                            required>
+                            required
+                            placeholder="Masukkan Nama Lengkap">
                     </div>
 
                     {{-- Jenis Kelamin --}}
@@ -44,7 +45,7 @@
                         <label class="block text-gray-700 font-semibold mb-1">Jenis Kelamin</label>
                         <select name="gender"
                             class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                            <option value="">-- Pilih Jenis Kelamin --</option>
+                            <option value="">Pilih Jenis Kelamin</option>
                             <option value="male" {{ old('gender') == 'male' ? 'selected' : '' }}>Laki-laki</option>
                             <option value="female" {{ old('gender') == 'female' ? 'selected' : '' }}>Perempuan</option>
                         </select>
@@ -87,11 +88,11 @@
                 {{-- KIRI BAWAH --}}
                 <div>
                     <div class="mb-5">
-                        <label class="block text-gray-700 font-semibold mb-1">Orang Tua (Parent)</label>
+                        <label class="block text-gray-700 font-semibold mb-1">Orang Tua</label>
                         <select name="parent_id"
                             class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                            <option value="">-- Pilih Orang Tua --</option>
-                            @foreach ($family as $member)
+                            <option value="">Pilih Orang Tua</option>
+                            @foreach ($parent as $member)
                                 <option value="{{ $member['id'] }}" {{ old('parent_id') == $member['id'] ? 'selected' : '' }}>
                                     {{ $member['name'] }}
                                 </option>
@@ -103,10 +104,10 @@
                 {{-- KANAN BAWAH --}}
                 <div>
                     <div class="mb-5">
-                        <label class="block text-gray-700 font-semibold mb-1">Pasangan (Partner)</label>
+                        <label class="block text-gray-700 font-semibold mb-1">Pasangan</label>
                         <select name="partner_id"
                             class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                            <option value="">-- Pilih Pasangan --</option>
+                            <option value="">Belum Ada</option>
                             @foreach ($family as $member)
                                 <option value="{{ $member['id'] }}" {{ old('partner_id') == $member['id'] ? 'selected' : '' }}>
                                     {{ $member['name'] }}

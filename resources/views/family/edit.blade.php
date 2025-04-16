@@ -90,11 +90,11 @@
                 <div>
                     {{-- Orang Tua --}}
                     <div class="mb-2">
-                        <label class="block text-gray-700 font-semibold mb-1">Orang Tua (Parent)</label>
+                        <label class="block text-gray-700 font-semibold mb-1">Orang Tua</label>
                         <select name="parent_id"
                                 class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                            <option value="">-- Pilih Orang Tua --</option>
-                            @foreach ($family as $person)
+                            <option value="">Pilih Orang Tua</option>
+                            @foreach ($parent as $person)
                                 <option value="{{ $person['id'] }}" {{ old('parent_id', $member->parent_id) == $person['id'] ? 'selected' : '' }}>
                                     {{ $person['name'] }}
                                 </option>
@@ -107,10 +107,10 @@
                 <div>
                     {{-- Pasangan --}}
                     <div class="mb-2">
-                        <label class="block text-gray-700 font-semibold mb-1">Pasangan (Partner)</label>
+                        <label class="block text-gray-700 font-semibold mb-1">Pasangan</label>
                         <select name="partner_id"
                                 class="w-full bg-gray-50 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-400 focus:outline-none">
-                            <option value="">-- Pilih Pasangan --</option>
+                            <option value="">Pilih Pasangan</option>
                             @foreach ($family as $person)
                                 <option value="{{ $person['id'] }}" {{ old('partner_id', $member->partner_id) == $person['id'] ? 'selected' : '' }}>
                                     {{ $person['name'] }}
