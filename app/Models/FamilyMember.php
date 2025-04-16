@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -17,7 +18,8 @@ class FamilyMember extends Model
         'from',
         'photo',
         'partner_id',
-        'parent_id'
+        'parent_id',
+        'user_id'
     ];
 
     // Relasi ke pasangan
@@ -36,6 +38,12 @@ class FamilyMember extends Model
     public function children()
     {
         return $this->hasMany(FamilyMember::class, 'parent_id');
+    }
+
+    // ke user one to one
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 }
